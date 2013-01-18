@@ -42,7 +42,7 @@ class Pointer(val p: Long) extends AnyVal {
     _unsafe.putByte(p, x)
   }
 
-  def shoft: Short = {
+  def short: Short = {
     _unsafe.getShort(p)
   }
 
