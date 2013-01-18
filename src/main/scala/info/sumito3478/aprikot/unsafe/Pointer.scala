@@ -38,7 +38,7 @@ class Pointer(val p: Long) extends AnyVal {
     _unsafe.getByte(p)
   }
 
-  def byte(x: Byte): Unit = {
+  def byte_=(x: Byte): Unit = {
     _unsafe.putByte(p, x)
   }
 
@@ -46,7 +46,7 @@ class Pointer(val p: Long) extends AnyVal {
     _unsafe.getShort(p)
   }
 
-  def short(x: Short): Unit = {
+  def short_=(x: Short): Unit = {
     _unsafe.putShort(p, x)
   }
 
@@ -54,7 +54,7 @@ class Pointer(val p: Long) extends AnyVal {
     _unsafe.getInt(p)
   }
 
-  def int(x: Int): Unit = {
+  def int_=(x: Int): Unit = {
     _unsafe.putInt(p, x)
   }
 
@@ -62,7 +62,7 @@ class Pointer(val p: Long) extends AnyVal {
     _unsafe.getLong(p)
   }
 
-  def long(x: Long): Unit = {
+  def long_=(x: Long): Unit = {
     _unsafe.putLong(p, x)
   }
 
@@ -70,7 +70,7 @@ class Pointer(val p: Long) extends AnyVal {
     _unsafe.getFloat(p)
   }
 
-  def float(x: Float): Unit = {
+  def float_=(x: Float): Unit = {
     _unsafe.putFloat(p, x)
   }
 
@@ -78,7 +78,7 @@ class Pointer(val p: Long) extends AnyVal {
     _unsafe.getDouble(p)
   }
 
-  def double(x: Double): Unit = {
+  def double_=(x: Double): Unit = {
     _unsafe.putDouble(p, x)
   }
 
@@ -130,7 +130,7 @@ class Pointer(val p: Long) extends AnyVal {
     new Pointer(_unsafe.getAddress(p))
   }
 
-  def pointer(x: Long): Unit = {
+  def pointer_=(x: Long): Unit = {
     _unsafe.putAddress(p, x)
   }
 
