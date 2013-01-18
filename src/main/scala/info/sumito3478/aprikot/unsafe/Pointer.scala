@@ -18,9 +18,9 @@ package info.sumito3478.aprikot.unsafe
 
 import java.nio.ByteBuffer
 
-import scala.concurrent.util.Unsafe.{instance => _unsafe}
+import scala.concurrent.util.Unsafe.{ instance => _unsafe }
 
-import com.sun.jna.{Pointer => JPointer}
+import com.sun.jna.{ Pointer => JPointer }
 
 /**
  * An implementation of [[Pointer]] underlined with [[com.sun.jna.Pointer]].
