@@ -111,4 +111,23 @@ class PointerSpec extends FunSpec {
       println(ret3)
     }
   }
+
+  describe("Pointer#memcpy") {
+    it("should copy memory from one memory block to another") {
+      using(Memory(4)) {
+        block1 =>
+          val p1 = block1.pointer
+          Array[Byte](1, 1, 1, 1).memcpy(p1)
+          using(Memory(8)) {
+            block2 =>
+              val p2 = block2.pointer
+              p1.memcpy(p2, 4)
+              p1.memcpy(p2 + 4, 4)
+              val ret = new Array[Byte](8)
+              p2.memcpy(ret, 8)
+              assert(ret === Array[Byte](1, 1, 1, 1, 1, 1, 1, 1))
+          }
+      }
+    }
+  }
 }

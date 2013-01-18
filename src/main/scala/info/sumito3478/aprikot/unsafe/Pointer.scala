@@ -18,9 +18,9 @@ package info.sumito3478.aprikot.unsafe
 
 import java.nio.ByteBuffer
 
-import scala.concurrent.util.Unsafe.{instance => _unsafe}
+import scala.concurrent.util.Unsafe.{ instance => _unsafe }
 
-import com.sun.jna.{Pointer => JPointer}
+import com.sun.jna.{ Pointer => JPointer }
 
 /**
  * An implementation of [[Pointer]] underlined with [[com.sun.jna.Pointer]].
@@ -80,6 +80,50 @@ class Pointer(val p: Long) extends AnyVal {
 
   def double(x: Double): Unit = {
     _unsafe.putDouble(p, x)
+  }
+
+  def memcpy(dest: Pointer, len: Long): Unit = {
+    _unsafe.copyMemory(p, dest.p, len)
+  }
+
+  def memcpy(dest: Array[Byte], len: Long): Unit = {
+    var i = 0
+    var cp = p
+    while (i < len) {
+      dest(i) = _unsafe.getByte(cp)
+      i += 1
+      cp += 1
+    }
+  }
+
+  def memcpy(dest: Array[Short], len: Long): Unit = {
+    var i = 0
+    var cp = p
+    while (i < len) {
+      dest(i) = _unsafe.getShort(cp)
+      i += 1
+      cp += 2
+    }
+  }
+
+  def memcpy(dest: Array[Int], len: Long): Unit = {
+    var i = 0
+    var cp = p
+    while (i < len) {
+      dest(i) = _unsafe.getInt(cp)
+      i += 1
+      cp += 4
+    }
+  }
+
+  def memcpy(dest: Array[Long], len: Long): Unit = {
+    var i = 0
+    var cp = p
+    while (i < len) {
+      dest(i) = _unsafe.getLong(cp)
+      i += 1
+      cp += 8
+    }
   }
 
   def pointer: Pointer = {
