@@ -29,7 +29,7 @@ class PointerSpec extends FunSpec {
       using(Memory(4)) {
         block =>
           var p = block.pointer
-          p.int(le(0xcafebabe))
+          p.int = le(0xcafebabe)
           assert((p.byte & 0xff) === 0xbe)
           p += 1
           assert((p.byte & 0xff) === 0xba)
@@ -94,7 +94,7 @@ class PointerSpec extends FunSpec {
             var cp = p
             var i = 0
             while (i < s) {
-              cp.byte(1)
+              cp.byte = 1
               cp += 1
               i += 1
             }
