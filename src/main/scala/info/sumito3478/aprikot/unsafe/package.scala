@@ -18,10 +18,132 @@ package info.sumito3478.aprikot
 
 import scala.concurrent.util.Unsafe.{ instance => _unsafe }
 
+import java.lang.{ Integer => JInt }
+import java.lang.{ Long => JLong }
+import java.lang.{ Short => JShort }
+
 /**
  * An implementation of [[Pointer]] underlined with [[com.sun.jna.Pointer]].
  */
 package object unsafe {
+  private[this] val le = (0xcafebabe >>> 16) == 0xcafe
+
+  private[this] val be = !le
+
+  implicit class ShortW(val underlined: Short) extends AnyVal {
+    def bswap: Short = {
+      JShort.reverseBytes(underlined)
+    }
+
+    def toLE: Short = {
+      if (be) {
+        bswap
+      } else {
+        underlined
+      }
+    }
+
+    def toBE: Short = {
+      if (le) {
+        bswap
+      } else {
+        underlined
+      }
+    }
+
+    def fromLE: Short = {
+      if (be) {
+        bswap
+      } else {
+        underlined
+      }
+    }
+
+    def fromBE: Short = {
+      if (le) {
+        bswap
+      } else {
+        underlined
+      }
+    }
+  }
+
+  implicit class IntW(val underlined: Int) extends AnyVal {
+    def bswap: Int = {
+      JInt.reverseBytes(underlined)
+    }
+
+    def toLE: Int = {
+      if (be) {
+        bswap
+      } else {
+        underlined
+      }
+    }
+
+    def toBE: Int = {
+      if (le) {
+        bswap
+      } else {
+        underlined
+      }
+    }
+
+    def fromLE: Int = {
+      if (be) {
+        bswap
+      } else {
+        underlined
+      }
+    }
+
+    def fromBE: Int = {
+      if (le) {
+        bswap
+      } else {
+        underlined
+      }
+    }
+  }
+
+  implicit class LongW(val underlined: Long) extends AnyVal {
+    def bswap: Long = {
+      JLong.reverseBytes(underlined)
+    }
+
+    def toLE: Long = {
+      if (be) {
+        bswap
+      } else {
+        underlined
+      }
+    }
+
+    def toBE: Long = {
+      if (le) {
+        bswap
+      } else {
+        underlined
+      }
+    }
+
+    def fromLE: Long = {
+      if (be) {
+        bswap
+      } else {
+        underlined
+      }
+    }
+
+    def fromBE: Long = {
+      if (le) {
+        bswap
+      } else {
+        underlined
+      }
+    }
+  }
+
   implicit class ArrayOfByteW(val underlined: Array[Byte]) extends AnyVal {
     def memcpy(dest: Pointer, start: Int, len: Int): Unit = {
       var i = start
