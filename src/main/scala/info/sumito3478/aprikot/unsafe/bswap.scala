@@ -16,9 +16,9 @@
 
 package info.sumito3478.aprikot.unsafe
 
-import java.lang.{Integer => JInt}
-import java.lang.{Long => JLong}
-import java.lang.{Short => JShort}
+import java.lang.{ Integer => JInt }
+import java.lang.{ Long => JLong }
+import java.lang.{ Short => JShort }
 
 /**
  * Converts an integral value to the value with reversed bytes.
