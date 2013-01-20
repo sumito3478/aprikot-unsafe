@@ -66,8 +66,12 @@ object Memory {
         new Pointer(ptr)
       }
 
-      def disposeInternal(): Unit = {
+      def disposeInternal: Unit = {
         Native.free(ptr)
+      }
+
+      override def finalize: Unit = {
+        dispose
       }
     }
   }
