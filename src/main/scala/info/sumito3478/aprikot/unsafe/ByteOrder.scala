@@ -16,7 +16,7 @@
 
 package info.sumito3478.aprikot.unsafe
 
-import java.lang.{Double => JDouble}
+import java.lang.{ Double => JDouble }
 
 sealed trait ByteOrder
 
@@ -30,20 +30,20 @@ object ByteOrder {
   val isLE: Boolean = {
     (0xcafebabe >>> 16) == 0xcafe
   }
-  
+
   val isBE: Boolean = {
-    ! isLE
+    !isLE
   }
-  
+
   val isArmLE: Boolean = {
     // TODO: I'm not sure this is really correct...
     JDouble.doubleToLongBits(1.0) == 0x3ff00000L
   }
 
   val native: ByteOrder = {
-    if(isArmLE) {
+    if (isArmLE) {
       ArmLittleEndian
-    } else if(isLE) {
+    } else if (isLE) {
       LittleEndian
     } else {
       BigEndian

@@ -130,7 +130,7 @@ class PointerSpec extends FunSpec {
       }
     }
   }
-  
+
   describe("Pointer#longLE_=") {
     it("""should store long value to the given memory block in little-endian
         |byte order.""".stripMargin) {
