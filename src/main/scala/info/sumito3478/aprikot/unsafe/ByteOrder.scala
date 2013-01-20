@@ -16,11 +16,15 @@
 
 package info.sumito3478.aprikot.unsafe
 
+import java.lang.{Double => JDouble}
+
 sealed trait ByteOrder
 
 case object LittleEndian extends ByteOrder
 
 case object BigEndian extends ByteOrder
+
+case object ArmLittleEndian extends ByteOrder
 
 object ByteOrder {
   val isLE: Boolean = {
@@ -31,8 +35,15 @@ object ByteOrder {
     ! isLE
   }
   
+  val isArmLE: Boolean = {
+    // TODO: I'm not sure this is really correct...
+    JDouble.doubleToLongBits(1.0) == 0x3ff00000L
+  }
+
   val native: ByteOrder = {
-    if(isLE) {
+    if(isArmLE) {
+      ArmLittleEndian
+    } else if(isLE) {
       LittleEndian
     } else {
       BigEndian
