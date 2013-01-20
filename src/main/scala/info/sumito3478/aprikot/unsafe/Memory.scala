@@ -69,6 +69,10 @@ object Memory {
       def disposeInternal(): Unit = {
         Native.free(ptr)
       }
+
+      override def finalize: Unit = {
+        dispose()
+      }
     }
   }
 }
