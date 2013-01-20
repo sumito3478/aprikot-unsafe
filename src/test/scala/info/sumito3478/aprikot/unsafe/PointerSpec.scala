@@ -17,7 +17,7 @@
 package info.sumito3478.aprikot.unsafe
 
 import java.nio.ByteBuffer
-import java.nio.ByteOrder
+import java.nio.{ ByteOrder => JByteOrder }
 
 import scala.concurrent.util.Unsafe.{ instance => _unsafe }
 
@@ -71,7 +71,7 @@ class PointerSpec extends FunSpec {
       System.gc()
       // use DirectBuffer.
       val ret2 = benchmark(1) {
-        val block = ByteBuffer.allocateDirect(s).order(ByteOrder.LITTLE_ENDIAN)
+        val block = ByteBuffer.allocateDirect(s).order(JByteOrder.LITTLE_ENDIAN)
         var i = 0
         while (i < s) {
           block.put(i, 1)
@@ -127,6 +127,31 @@ class PointerSpec extends FunSpec {
               p2.memcpy(ret, 8)
               assert(ret === Array[Byte](1, 1, 1, 1, 1, 1, 1, 1))
           }
+      }
+    }
+  }
+  
+  describe("Pointer#longLE_=") {
+    it("""should store long value to the given memory block in little-endian
+        |byte order.""".stripMargin) {
+      using(Memory(8)) {
+        block =>
+          val p = block.pointer
+          p.longLE = 0xcafebabedeadbeefL
+          assert(p.int === 0xdeadbeef)
+          assert((p + 4).int == 0xcafebabe)
+      }
+    }
+  }
+  describe("Pointer#longBE_=") {
+    it("""should store long value to the given memory block in big-endian
+        |byte order.""".stripMargin) {
+      using(Memory(8)) {
+        block =>
+          val p = block.pointer
+          p.longBE = 0xcafebabedeadbeefL
+          assert(p.intBE === 0xcafebabe)
+          assert((p + 4).intBE == 0xdeadbeef)
       }
     }
   }
