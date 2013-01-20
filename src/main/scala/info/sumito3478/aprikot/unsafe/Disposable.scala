@@ -25,11 +25,11 @@ package info.sumito3478.aprikot.unsafe
 trait Disposable {
   private[this] var disposed = false
 
-  protected[this] def disposeInternal(): Unit
+  protected[this] def disposeInternal: Unit
 
-  def dispose(): Unit = {
+  def dispose: Unit = {
     if (!disposed) {
-      disposeInternal()
+      disposeInternal
     }
     disposed = true
   }

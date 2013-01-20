@@ -34,7 +34,7 @@ object using {
     try {
       f(d)
     } finally {
-      d.dispose()
+      d.dispose
     }
   }
 }
