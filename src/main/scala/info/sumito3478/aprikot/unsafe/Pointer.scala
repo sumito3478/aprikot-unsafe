@@ -42,7 +42,7 @@ class Pointer(val p: Long) extends AnyVal {
     _unsafe.putByte(p, x)
   }
 
-  def shoft: Short = {
+  def short: Short = {
     _unsafe.getShort(p)
   }
 
@@ -80,6 +80,54 @@ class Pointer(val p: Long) extends AnyVal {
 
   def double_=(x: Double): Unit = {
     _unsafe.putDouble(p, x)
+  }
+
+  def shortLE: Short = {
+    short.fromLE
+  }
+
+  def shortLE_=(x: Short) = {
+    short = x.toLE
+  }
+
+  def intLE: Int = {
+    int.fromLE
+  }
+
+  def intLE_=(x: Int) = {
+    int = x.toLE
+  }
+
+  def longLE: Long = {
+    long.fromLE
+  }
+
+  def longLE_=(x: Long) = {
+    long = x.toLE
+  }
+
+  def shortBE: Short = {
+    short.fromBE
+  }
+
+  def shortBE_=(x: Short) = {
+    short = x.toBE
+  }
+
+  def intBE: Int = {
+    int.fromBE
+  }
+
+  def intBE_=(x: Int) = {
+    int = x.toBE
+  }
+
+  def longBE: Long = {
+    long.fromBE
+  }
+
+  def longBE_=(x: Long) = {
+    long = x.toBE
   }
 
   def memcpy(dest: Pointer, len: Long): Unit = {
